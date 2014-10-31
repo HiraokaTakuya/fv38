@@ -430,14 +430,6 @@ int main(int argc, char* argv[]) {
 	ifs.read(reinterpret_cast<char*>(&pc_on_sq[0][0]), sizeof(pc_on_sq));
 	ifs.read(reinterpret_cast<char*>(&kkp[0][0][0]  ), sizeof(kkp     ));
 
-	// KPP, KKP で -2 ~ 2 の間の評価値は 0 にする。
-	for (auto it = &(** std::begin(pc_on_sq)); it != &(** std::end(pc_on_sq)); ++it) {
-		if (abs(*it) <= 2) *it = 0;
-	}
-	for (auto it = &(***std::begin(kkp)); it != &(***std::end(kkp)); ++it) {
-		if (abs(*it) <= 2) *it = 0;
-	}
-
 	// 入力と出力の型のサイズが違っても良いように、memcpy ではなく std::copy を使う。
 	std::copy(&(** std::begin(pc_on_sq)), &(** std::end(pc_on_sq)), &(** std::begin(mid_pc_on_sq)));
 	std::copy(&(***std::begin(kkp     )), &(***std::end(kkp     )), &(***std::begin(mid_kkp     )));
